@@ -1,0 +1,29 @@
+{
+  "name": "icafbackend",
+  "version": "1.0.0",
+  "description": "backend for icaf project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Y3S1-Assignment-Group/ICAFBackend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Y3S1-Assignment-Group/ICAFBackend/issues"
+  },
+  "homepage": "https://github.com/Y3S1-Assignment-Group/ICAFBackend#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.6",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.9",
+    "nodemon": "^2.0.7"
+  }
+}
