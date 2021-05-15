@@ -4,61 +4,61 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 
 //get Admin details
-// const getAdminDetails = async (req, res) => {
-//   try {
-//     //get user details
-//     //-password : dont return the pasword
-//     const user = await Admin.findById(req.user.id).select("-password");
-//     res.json(user);
-//   } catch {
-//     console.log(err.message);
-//     res.status(500).send("Server Error");
-//   }
-// };
+const getAdminDetails = async (req, res) => {
+  try {
+    //get user details
+    //-password : dont return the pasword
+    const user = await Admin.findById(req.user.id).select("-password");
+    res.json(user);
+  } catch {
+    console.log(err.message);
+    res.status(500).send("Server Error");
+  }
+};
 
 //Authenticate admin and get token
-// const loginAdmin = async (req, res) => {
-//   const { email, password } = req.body;
+const loginAdmin = async (req, res) => {
+  const { email, password } = req.body;
 
-//   try {
-//     //See if user Exist
-//     let user = await Admin.findOne({ email });
+  try {
+    //See if user Exist
+    let user = await Admin.findOne({ email });
 
-//     if (!user) {
-//       return res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
-//     }
+    if (!user) {
+      return res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
+    }
 
-//     //match the user email and password
+    //match the user email and password
 
-//     const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, user.password);
 
-//     if (!isMatch) {
-//       return res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
-//     }
+    if (!isMatch) {
+      return res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
+    }
 
-//     //Return jsonwebtoken
+    //Return jsonwebtoken
 
-//     const payload = {
-//       user: {
-//         id: user.id,
-//       },
-//     };
+    const payload = {
+      user: {
+        id: user.id,
+      },
+    };
 
-//     jwt.sign(
-//       payload,
-//       config.get("jwtSecret"),
-//       { expiresIn: 360000 },
-//       (err, token) => {
-//         if (err) throw err;
-//         res.json({ token });
-//       }
-//     );
-//   } catch (err) {
-//     //Something wrong with the server
-//     console.error(err.message);
-//     return res.status(500).send("Server Error");
-//   }
-// };
+    jwt.sign(
+      payload,
+      config.get("jwtSecret"),
+      { expiresIn: 360000 },
+      (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      }
+    );
+  } catch (err) {
+    //Something wrong with the server
+    console.error(err.message);
+    return res.status(500).send("Server Error");
+  }
+};
 
 //Register admin
 const registerAdmin = async (req, res) => {
