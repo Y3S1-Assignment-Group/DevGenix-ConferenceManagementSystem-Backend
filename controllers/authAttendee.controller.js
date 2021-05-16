@@ -3,6 +3,63 @@ const Attendee = require("../models/Attendee.model");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 
+//get Attendee details
+const getAttendeeDetails = async (req, res) => {
+  try {
+    //get user details
+    //-password : dont return the pasword
+    const user = await Attendee.findById(req.user.id).select("-password");
+    res.json(user);
+  } catch {
+    console.log(err.message);
+    res.status(500).send("Server Error");
+  }
+};
+
+//Authenticate Attendee and get token ( Login )
+const loginAttendee = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    //See if user Exist
+    let user = await Attendee.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
+    }
+
+    //match the user email and password
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
+    }
+
+    //Return jsonwebtoken
+
+    const payload = {
+      user: {
+        id: user.id,
+      },
+    };
+
+    jwt.sign(
+      payload,
+      config.get("jwtSecret"),
+      { expiresIn: 360000 },
+      (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      }
+    );
+  } catch (err) {
+    //Something wrong with the server
+    console.error(err.message);
+    return res.status(500).send("Server Error");
+  }
+};
+
 //Register Attendee
 const registerAttendee = async (req, res) => {
   const {
@@ -14,6 +71,8 @@ const registerAttendee = async (req, res) => {
     universityOrWorkPlace,
     workshopAttends,
     statementOfInterest,
+    contactNumber,
+    paid,
   } = req.body;
 
   try {
@@ -39,6 +98,8 @@ const registerAttendee = async (req, res) => {
       universityOrWorkPlace,
       workshopAttends,
       statementOfInterest,
+      contactNumber,
+      paid,
     });
 
     //Encrypt Password
@@ -76,4 +137,4 @@ const registerAttendee = async (req, res) => {
   }
 };
 
-module.exports = { registerAttendee };
+module.exports = { registerAttendee, getAttendeeDetails, loginAttendee };
