@@ -15,7 +15,7 @@ router.post("/register", registerEditor);
 //@route  POST api/authEditor
 //@desc   authenticate user and get token(login)
 //@access Public
-// router.post("/", loginEditor);
+router.post("/", loginEditor);
 
 // //@route  GET api/authEditor
 // //@desc   Get editor details using jwt
