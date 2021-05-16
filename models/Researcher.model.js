@@ -35,16 +35,16 @@ const UserSchema = new Schema({
   contactNumber: {
     type: String,
   },
-  workshop: {
-    workshopName: { type: String },
+  paid: {
+    type: Boolean,
+  },
+  researchPaper: {
+    paperTitle: { type: String },
     description: { type: String },
-    timeTo: { type: Date },
-    timeFrom: { type: Date },
-    date: { type: Date },
-    powerpointLink: { type: String },
+    paperLink: { type: String },
     submittedDate: { type: Date },
     approved: { type: Boolean },
   },
 });
 
-module.exports = Presenter = mongoose.model("Presenter", UserSchema);
+module.exports = Researcher = mongoose.model("Researcher", UserSchema);

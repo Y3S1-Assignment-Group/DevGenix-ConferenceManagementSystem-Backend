@@ -39,4 +39,4 @@ const UserSchema = new Schema({
     type: Boolean,
   },
 });
-module.exports = User = mongoose.model("Attendee", UserSchema);
+module.exports = Attendee = mongoose.model("Attendee", UserSchema);
