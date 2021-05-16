@@ -22,4 +22,24 @@ const getUnapprovedWorkshops = async (req, res) => {
   }
 };
 
-module.exports = { getApprovedWorkshops, getUnapprovedWorkshops };
+//Approved/Decline Workshops
+const approveWorkshops = async (req, res) => {
+    try {
+      Presenter.findByIdAndUpdate(req.body.id)
+        .then((existWorkshop) => {
+            existWorkshop.workshop.approved = req.body.approved;
+            existWorkshop
+            .save()
+            .then(() =>
+              req.body.approved
+                ? res.json("Workshop Approved!")
+                : res.json("Workshop Unpproved!")
+            )
+            .catch((err) => res.status(400).json("Error: " + err));
+        })
+        .catch((err) => res.status(400).json("Error: " + err));
+    } catch (err) {
+      res.status(500).send("Server Error");
+    }
+  };
+module.exports = { getApprovedWorkshops, getUnapprovedWorkshops ,approveWorkshops};
