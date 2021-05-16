@@ -29,6 +29,9 @@ app.use("/api/authPresenter", require("./routes/authPresenter.route"));
 //-------------------Editor---------------------
 app.use("/api/autheditor", require("./routes/authEditor.route"));
 
+//-------------------Conference---------------------
+app.use("/api/authConference", require("./routes/authConference.route"));
+
 //-------------------Reviewer---------------------
 app.use("/api/authReviewer", require("./routes/authReviewer.route"));
 
@@ -40,6 +43,7 @@ app.use("/api/ResearchPapers", require("./routes/researchpapers.route"));
 
 //-------------------workshops---------------------
 app.use("/api/Workshops", require("./routes/workshops.route"));
+
 
 const PORT = process.env.PORT || 5000;
 
