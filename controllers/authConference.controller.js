@@ -7,7 +7,7 @@ const Conference = require("../models/Conference.model");
 //Add conference
 const addConference = async (req, res) => {
     const { date, venue, confTitle, description, fomTime, toTime} = req.body;
-    const status = "P";
+    const status = false;
 
     try {
 

@@ -21,7 +21,7 @@ const ConferenceSchema = new Schema({
       type: Date,
     },
     status: {
-      type: String,
+      type: Boolean,
     }
   });
   module.exports = User = mongoose.model("Conference", ConferenceSchema);
