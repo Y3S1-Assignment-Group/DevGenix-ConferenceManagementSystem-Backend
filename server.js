@@ -18,7 +18,10 @@ app.get("/", (req, res) => res.send("ICAF Backend Api Running"));
 //Define Routes
 
 //-------------------Admin---------------------
-app.use("/api/authadmin", require("./routes/authadmin.routes"));
+app.use("/api/authadmin", require("./routes/authadmin.route"));
+
+//-------------------Attendee---------------------
+app.use("/api/authattendee", require("./routes/authAttendee.route"));
 
 const PORT = process.env.PORT || 5000;
 

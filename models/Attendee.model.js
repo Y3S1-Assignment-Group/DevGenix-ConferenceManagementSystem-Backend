@@ -18,5 +18,19 @@ const UserSchema = new Schema({
   password: {
     type: String,
   },
+  jobStatus: {
+    type: String,
+  },
+  universityOrWorkPlace: {
+    type: String,
+  },
+  workshopAttends: [
+    {
+      workshopName: { type: String },
+    },
+  ],
+  statementOfInterest: {
+    type: String,
+  },
 });
-module.exports = User = mongoose.model("Admin", UserSchema);
+module.exports = User = mongoose.model("Attendee", UserSchema);
