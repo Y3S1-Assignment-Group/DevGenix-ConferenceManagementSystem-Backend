@@ -1,6 +1,6 @@
-const express = require("express");
-const cors = require("cors");
-const connectDB = require("./config/db");
+const express = require('express');
+const cors = require('cors');
+const connectDB = require('./config/db');
 
 const app = express();
 
@@ -13,21 +13,24 @@ app.use(cors());
 //Init Middleware( include  bodyparser through express)
 app.use(express.json({ extended: false }));
 
-app.get("/", (req, res) => res.send("ICAF Backend Api Running"));
+app.get('/', (req, res) => res.send('ICAF Backend Api Running'));
 
 //Define Routes
 
 //-------------------Admin---------------------
-app.use("/api/authadmin", require("./routes/authadmin.route"));
+app.use('/api/authadmin', require('./routes/authadmin.route'));
 
 //-------------------Attendee---------------------
-app.use("/api/authattendee", require("./routes/authAttendee.route"));
+app.use('/api/authattendee', require('./routes/authAttendee.route'));
 
 //-------------------Presenter---------------------
-app.use("/api/authPresenter", require("./routes/authPresenter.route"));
+app.use('/api/authPresenter', require('./routes/authPresenter.route'));
 
 //-------------------Editor---------------------
-app.use("/api/autheditor", require("./routes/authEditor.route"));
+app.use('/api/autheditor', require('./routes/authEditor.route'));
+
+//-------------------Reviewer---------------------
+app.use('/api/authReviewer', require('./routes/authReviewer.route'));
 
 const PORT = process.env.PORT || 5000;
 
