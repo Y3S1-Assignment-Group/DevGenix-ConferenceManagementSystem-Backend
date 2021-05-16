@@ -25,14 +25,4 @@ router.post("/", loginEditor);
 // //Route restricted with authetication (JWT Token)
 router.get("/", auth, getEditorDetails);
 
-//@route  POST api/authEditor
-//@desc   add conference
-//@access Public
-router.post("/addConference", auth, addConference);
-
-//@route  PUT api/authEditor
-//@desc   update conference
-//@access Public
-router.put("/updateConference/:id", auth, updateConference);
-
 module.exports = router;

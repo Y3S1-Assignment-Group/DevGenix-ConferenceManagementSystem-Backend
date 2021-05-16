@@ -29,6 +29,9 @@ app.use("/api/authPresenter", require("./routes/authPresenter.route"));
 //-------------------Editor---------------------
 app.use("/api/autheditor", require("./routes/authEditor.route"));
 
+//-------------------Conference---------------------
+app.use("/api/authConference", require("./routes/authConference.route"));
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
