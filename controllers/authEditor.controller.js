@@ -122,6 +122,7 @@ const registerEditor = async (req, res) => {
 //Add conference
 const addConference = async (req, res) => {
     const { date, venue, confTitle, description, fomTime, toTime} = req.body;
+    const status = "P";
 
     try {
 
@@ -133,6 +134,7 @@ const addConference = async (req, res) => {
           description,
           fomTime,
           toTime,
+          status,
       });      
 
       //save conference to db

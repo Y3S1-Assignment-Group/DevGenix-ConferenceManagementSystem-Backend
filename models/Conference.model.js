@@ -20,5 +20,8 @@ const ConferenceSchema = new Schema({
     toTime: {
       type: Date,
     },
+    status: {
+      type: String,
+    }
   });
   module.exports = User = mongoose.model("Conference", ConferenceSchema);
