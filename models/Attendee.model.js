@@ -32,5 +32,11 @@ const UserSchema = new Schema({
   statementOfInterest: {
     type: String,
   },
+  contactNumber: {
+    type: String,
+  },
+  paid: {
+    type: Boolean,
+  },
 });
 module.exports = User = mongoose.model("Attendee", UserSchema);
