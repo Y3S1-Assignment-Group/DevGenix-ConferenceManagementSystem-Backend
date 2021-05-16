@@ -23,6 +23,9 @@ app.use("/api/authadmin", require("./routes/authadmin.route"));
 //-------------------Attendee---------------------
 app.use("/api/authattendee", require("./routes/authAttendee.route"));
 
+//-------------------Presenter---------------------
+app.use("/api/authPresenter", require("./routes/authPresenter.route"));
+
 //-------------------Editor---------------------
 app.use("/api/autheditor", require("./routes/authEditor.route"));
 

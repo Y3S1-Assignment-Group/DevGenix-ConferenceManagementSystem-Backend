@@ -1,11 +1,26 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/authAttendee");
-const { registerAttendee } = require("../controllers/authAttendee.controller");
+const {
+  registerAttendee,
+  getAttendeeDetails,
+  loginAttendee,
+} = require("../controllers/authAttendee.controller");
 
-//@route  POST api/authadmin
-//@desc   Register Admin
+//@route  POST api/authattendee
+//@desc   Register Attendee
 //@access Public
 router.post("/register", registerAttendee);
+
+//@route  POST api/authattendee
+//@desc   authenticate user and get token(login)
+//@access Public
+router.post("/", loginAttendee);
+
+//@route  GET api/authattendee
+//@desc   Get Attendee details using jwt
+//@access Attendee
+//Route restricted with authetication (JWT Token)
+router.get("/", auth, getAttendeeDetails);
 
 module.exports = router;
