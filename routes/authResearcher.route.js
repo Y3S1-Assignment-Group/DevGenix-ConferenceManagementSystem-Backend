@@ -12,6 +12,6 @@ const {
 //@access Public
 router.get("/", auth, getResearcherDetails);
 router.post("/register", registerResearcher);
-// router.post("/", loginResearcher);
+router.post("/", loginResearcher);
 
 module.exports = router;
