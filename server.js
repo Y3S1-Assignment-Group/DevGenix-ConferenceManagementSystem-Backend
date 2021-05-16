@@ -44,6 +44,8 @@ app.use("/api/ResearchPapers", require("./routes/researchpapers.route"));
 //-------------------workshops---------------------
 app.use("/api/Workshops", require("./routes/workshops.route"));
 
+//-------------------Latest news---------------------
+app.use("/api/LatestNews", require("./routes/latestNews.route"));
 
 const PORT = process.env.PORT || 5000;
 
