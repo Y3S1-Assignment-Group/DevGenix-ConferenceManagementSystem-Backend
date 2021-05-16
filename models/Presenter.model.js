@@ -32,6 +32,19 @@ const UserSchema = new Schema({
   statementOfInterest: {
     type: String,
   },
+  contactNumber: {
+    type: String,
+  },
+  workshop: {
+    workshopName: { type: String },
+    description: { type: String },
+    timeTo: { type: Date },
+    timeFrom: { type: Date },
+    date: { type: Date },
+    powerpointLink: { type: String },
+    submittedDate: { type: Date },
+    approved: { type: Boolean },
+  },
 });
 
 module.exports = Presenter = mongoose.model("Presenter", UserSchema);
