@@ -6,6 +6,7 @@ const {
   loginEditor,
   registerEditor,
   addConference,
+  updateConference,
 } = require("../controllers/authEditor.controller");
 
 //@route  POST api/authEditor
@@ -28,5 +29,10 @@ router.get("/", auth, getEditorDetails);
 //@desc   add conference
 //@access Public
 router.post("/addConference", auth, addConference);
+
+//@route  PUT api/authEditor
+//@desc   update conference
+//@access Public
+router.put("/updateConference/:id", auth, updateConference);
 
 module.exports = router;
