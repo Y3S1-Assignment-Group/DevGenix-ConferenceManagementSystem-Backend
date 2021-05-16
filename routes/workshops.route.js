@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/authReviewer');
 
 const {
   getApprovedWorkshops,
@@ -14,6 +15,6 @@ router.get('/approved', getApprovedWorkshops);
 //@route  GET api/Workshops
 //@desc   Get Approved workshops
 //@access public
-router.get('/unapproved', getUnapprovedWorkshops);
+router.get('/unapproved', auth, getUnapprovedWorkshops);
 
 module.exports = router;
