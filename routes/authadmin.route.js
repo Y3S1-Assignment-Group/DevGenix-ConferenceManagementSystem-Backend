@@ -6,6 +6,7 @@ const {
   getAdminDetails,
   loginAdmin,
   registerAdmin,
+  approveConference,
 } = require("../controllers/authadmin.controller");
 
 //@route  POST api/authadmin
@@ -23,5 +24,10 @@ router.post("/", loginAdmin);
 //@access Admin
 //Route restricted with authetication (JWT Token)
 router.get("/", auth, getAdminDetails);
+
+//@route  PUT api/Conference/approvaldecision
+//@desc   Approve conference
+//@access public
+router.put("/approveConference/:id", auth, approveConference);
 
 module.exports = router;

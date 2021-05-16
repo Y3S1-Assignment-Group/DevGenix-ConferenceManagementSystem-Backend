@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const Admin = require("../models/Admin.model");
 const jwt = require("jsonwebtoken");
 const config = require("config");
+const Conference = require("../models/Conference.model");
 
 //get Admin details
 const getAdminDetails = async (req, res) => {
@@ -118,4 +119,25 @@ const registerAdmin = async (req, res) => {
   }
 };
 
-module.exports = { getAdminDetails, loginAdmin, registerAdmin };
+//Approved/Decline conference details
+const approveConference = async (req, res) => {
+  try {
+    const conference = Conference.findByIdAndUpdate(req.body.id)
+      .then((conference) => {
+        conference.status = req.body.status;
+        conference
+          .save()
+          .then(() =>
+            req.body.status
+              ? res.json("Conference Approved!")
+              : res.json("Conference Unpproved!")
+          )
+          .catch((err) => res.status(400).json("Error: " + err));
+      })
+      .catch((err) => res.status(400).json("Error: " + err));
+  } catch (err) {
+    res.status(500).send("Server Error");
+  }
+};
+
+module.exports = { getAdminDetails, loginAdmin, registerAdmin, approveConference };
