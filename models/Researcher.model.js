@@ -38,5 +38,13 @@ const UserSchema = new Schema({
   paid: {
     type: Boolean,
   },
+  researchPaper: {
+    paperTitle: { type: String },
+    description: { type: String },
+    paperLink: { type: String },
+    submittedDate: { type: Date },
+    approved: { type: Boolean },
+  },
 });
-module.exports = Attendee = mongoose.model("Attendee", UserSchema);
+
+module.exports = Researcher = mongoose.model("Researcher", UserSchema);
