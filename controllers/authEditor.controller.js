@@ -119,4 +119,5 @@ const registerEditor = async (req, res) => {
   }
 };
 
+
 module.exports = { getEditorDetails, loginEditor, registerEditor};
