@@ -38,6 +38,9 @@ app.use("/api/authResearcher", require("./routes/authResearcher.route"));
 //-------------------Research Papers---------------------
 app.use("/api/ResearchPapers", require("./routes/researchpapers.route"));
 
+//-------------------workshops---------------------
+app.use("/api/Workshops", require("./routes/workshops.route"));
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
