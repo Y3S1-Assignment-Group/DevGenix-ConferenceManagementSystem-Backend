@@ -76,4 +76,62 @@ const registerPresenter = async (req, res) => {
     }
   };
   
-  module.exports = { registerPresenter };
+//get Presenter details
+const getPresenterDetails = async (req, res) => {
+  try {
+    //get Presenter details
+    //-password : dont return the pasword
+    const user = await Presenter.findById(req.user.id).select("-password");
+    res.json(user);
+  } catch {
+    console.log(err.message);
+    res.status(500).send("Server Error");
+  }
+};
+
+//Authenticate admin and get token
+const loginPresenter = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    //See if user Exist
+    let user = await Presenter.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
+    }
+
+    //match the user email and password
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
+    }
+
+    //Return jsonwebtoken
+
+    const payload = {
+      user: {
+        id: user.id,
+      },
+    };
+
+    jwt.sign(
+      payload,
+      config.get("jwtSecret"),
+      { expiresIn: 360000 },
+      (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      }
+    );
+  } catch (err) {
+    //Something wrong with the server
+    console.error(err.message);
+    return res.status(500).send("Server Error");
+  }
+};
+
+
+  module.exports = { registerPresenter , getPresenterDetails , loginPresenter };
