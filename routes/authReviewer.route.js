@@ -16,7 +16,7 @@ router.post('/register', registerReviewer);
 //@route  POST api/authReviewer
 //@desc   authenticate user and get token(login)
 //@access Public
-//router.post('/', loginReviewer);
+router.post('/', loginReviewer);
 
 //@route  GET api/authReviewer
 //@desc   Get Reviewer details using jwt
