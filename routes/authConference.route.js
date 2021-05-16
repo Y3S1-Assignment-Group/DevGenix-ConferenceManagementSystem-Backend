@@ -9,11 +9,11 @@ const {
 //@route  POST api/authEditor
 //@desc   add conference
 //@access Public
-router.post("/addConference", auth, addConference);
+router.post("/conference", auth, addConference);
 
 //@route  PUT api/authEditor
 //@desc   update conference
 //@access Public
-router.put("/updateConference/:id", auth, updateConference);
+router.put("/conference/:id", auth, updateConference);
 
 module.exports = router;
