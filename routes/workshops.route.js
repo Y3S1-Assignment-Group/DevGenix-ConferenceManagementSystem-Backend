@@ -5,6 +5,7 @@ const auth = require('../middleware/authReviewer');
 const {
   getApprovedWorkshops,
   getUnapprovedWorkshops,
+  approveWorkshops,
 } = require('../controllers/workshops.controller');
 
 //@route  GET api/Workshops
@@ -16,5 +17,10 @@ router.get('/approved', getApprovedWorkshops);
 //@desc   Get Approved workshops
 //@access public
 router.get('/unapproved', auth, getUnapprovedWorkshops);
+
+//@route  POST api/Workshops/approveWorkshop
+//@desc   approve Workshops
+//@access public
+router.put("/approveWorkshop", auth, approveWorkshops);
 
 module.exports = router;
