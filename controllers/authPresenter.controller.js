@@ -14,10 +14,12 @@ const registerPresenter = async (req, res) => {
       universityOrWorkPlace,
       workshopAttends,
       statementOfInterest,
+      contactNumber,
+      workshop,
     } = req.body;
   
     try {
-      //See if user Exist
+      //See if user Exist 
       let user = await Presenter.findOne({ email });
   
       if (user) {
@@ -39,6 +41,8 @@ const registerPresenter = async (req, res) => {
         universityOrWorkPlace,
         workshopAttends,
         statementOfInterest,
+        contactNumber,
+        workshop,
       });
   
       //Encrypt Password
