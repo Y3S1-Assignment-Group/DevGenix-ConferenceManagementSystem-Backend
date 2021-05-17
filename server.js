@@ -47,6 +47,9 @@ app.use("/api/Workshops", require("./routes/workshops.route"));
 //-------------------Latest news---------------------
 app.use("/api/LatestNews", require("./routes/latestNews.route"));
 
+//-------------------Payment---------------------
+app.use("/api/Payment", require("./routes/payment.route"));
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
