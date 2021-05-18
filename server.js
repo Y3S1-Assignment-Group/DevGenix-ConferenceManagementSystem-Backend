@@ -50,6 +50,9 @@ app.use('/api/LatestNews', require('./routes/latestNews.route'));
 //-------------------Templates---------------------
 app.use('/api/Templates', require('./routes/templates.route'));
 
+//-------------------Payment---------------------
+app.use("/api/Payment", require("./routes/payment.route"));
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
