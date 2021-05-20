@@ -1,6 +1,6 @@
-const express = require("express");
-const cors = require("cors");
-const connectDB = require("./config/db");
+const express = require('express');
+const cors = require('cors');
+const connectDB = require('./config/db');
 
 const app = express();
 
@@ -13,39 +13,42 @@ app.use(cors());
 //Init Middleware( include  bodyparser through express)
 app.use(express.json({ extended: false }));
 
-app.get("/", (req, res) => res.send("ICAF Backend Api Running"));
+app.get('/', (req, res) => res.send('ICAF Backend Api Running'));
 
 //Define Routes
 
 //-------------------Admin---------------------
-app.use("/api/authadmin", require("./routes/authadmin.route"));
+app.use('/api/authadmin', require('./routes/authadmin.route'));
 
 //-------------------Attendee---------------------
-app.use("/api/authattendee", require("./routes/authAttendee.route"));
+app.use('/api/authattendee', require('./routes/authAttendee.route'));
 
 //-------------------Presenter---------------------
-app.use("/api/authPresenter", require("./routes/authPresenter.route"));
+app.use('/api/authPresenter', require('./routes/authPresenter.route'));
 
 //-------------------Editor---------------------
-app.use("/api/autheditor", require("./routes/authEditor.route"));
+app.use('/api/autheditor', require('./routes/authEditor.route'));
 
 //-------------------Conference---------------------
-app.use("/api/authConference", require("./routes/authConference.route"));
+app.use('/api/authConference', require('./routes/authConference.route'));
 
 //-------------------Reviewer---------------------
-app.use("/api/authReviewer", require("./routes/authReviewer.route"));
+app.use('/api/authReviewer', require('./routes/authReviewer.route'));
 
 //-------------------Researcher ---------------------
-app.use("/api/authResearcher", require("./routes/authResearcher.route"));
+app.use('/api/authResearcher', require('./routes/authResearcher.route'));
 
 //-------------------Research Papers---------------------
-app.use("/api/ResearchPapers", require("./routes/researchpapers.route"));
+app.use('/api/ResearchPapers', require('./routes/researchpapers.route'));
 
 //-------------------workshops---------------------
-app.use("/api/Workshops", require("./routes/workshops.route"));
+app.use('/api/Workshops', require('./routes/workshops.route'));
 
 //-------------------Latest news---------------------
-app.use("/api/LatestNews", require("./routes/latestNews.route"));
+app.use('/api/LatestNews', require('./routes/latestNews.route'));
+
+//-------------------Templates---------------------
+app.use('/api/Templates', require('./routes/templates.route'));
 
 //-------------------Payment---------------------
 app.use("/api/Payment", require("./routes/payment.route"));
