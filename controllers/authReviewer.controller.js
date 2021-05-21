@@ -3,6 +3,19 @@ const Reviewer = require('../models/Reviewer.model');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 
+//get All Reviewer details
+const getAllReviewerDetails = async (req, res) => {
+  try {
+    //get all Reviewer details
+    //-password : dont return the pasword
+    const Rev = await Reviewer.find().select("-password");
+    res.json(Rev);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send("Server Error");
+  }
+};
+
 //get Reviewer details
 const getReviewerDetails = async (req, res) => {
   try {
@@ -120,4 +133,4 @@ const registerReviewer = async (req, res) => {
   }
 };
 
-module.exports = { getReviewerDetails, loginReviewer, registerReviewer };
+module.exports = { getReviewerDetails, loginReviewer, registerReviewer,getAllReviewerDetails };

@@ -6,6 +6,7 @@ const {
   getReviewerDetails,
   loginReviewer,
   registerReviewer,
+  getAllReviewerDetails,
 } = require('../controllers/authReviewer.controller');
 
 //@route  POST api/authReviewer
@@ -23,5 +24,8 @@ router.post('/', loginReviewer);
 //@access Reviewer
 //Route restricted with authetication (JWT Token)
 router.get('/', auth, getReviewerDetails);
+
+//@route  GET api/authReviewer/all
+router.get("/all", getAllReviewerDetails);
 
 module.exports = router;
