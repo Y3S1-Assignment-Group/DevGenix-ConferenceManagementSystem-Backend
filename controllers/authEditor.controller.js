@@ -2,7 +2,19 @@ const bcrypt = require("bcryptjs");
 const Editor = require("../models/Editor.model");
 const jwt = require("jsonwebtoken");
 const config = require("config");
-const Conference = require("../models/Conference.model");
+
+//get All Editor details
+const getAllEditorsDetails = async (req, res) => {
+  try {
+    //get all Editors details
+    //-password : dont return the pasword
+    const editors = await Editor.find().select("-password");
+    res.json(editors);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send("Server Error");
+  }
+};
 
 //get Editor details
 const getEditorDetails = async (req, res) => {
@@ -11,7 +23,7 @@ const getEditorDetails = async (req, res) => {
     //-password : dont return the pasword
     const user = await Editor.findById(req.user.id).select("-password");
     res.json(user);
-  } catch {
+  } catch (err) {
     console.log(err.message);
     res.status(500).send("Server Error");
   }
@@ -70,7 +82,9 @@ const registerEditor = async (req, res) => {
     let user = await Editor.findOne({ email });
 
     if (user) {
-      return res.status(400).json({ errors: [{ msg: "Editor already exist" }] });
+      return res
+        .status(400)
+        .json({ errors: [{ msg: "Editor already exist" }] });
     }
 
     const role = "editor";
@@ -119,5 +133,9 @@ const registerEditor = async (req, res) => {
   }
 };
 
-
-module.exports = { getEditorDetails, loginEditor, registerEditor};
+module.exports = {
+  getAllEditorsDetails,
+  getEditorDetails,
+  loginEditor,
+  registerEditor,
+};

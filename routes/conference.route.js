@@ -4,7 +4,7 @@ const auth = require("../middleware/authEditor");
 const {
   addConference,
   updateConference,
-} = require("../controllers/authConference.controller");
+} = require("../controllers/conference.controller");
 
 //@route  POST api/authEditor
 //@desc   add conference
