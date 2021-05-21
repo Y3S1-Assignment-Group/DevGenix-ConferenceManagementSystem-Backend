@@ -24,24 +24,20 @@ const UserSchema = new Schema({
   universityOrWorkPlace: {
     type: String,
   },
-  workshopAttends: [
-    {
-      workshopName: { type: String },
-    },
-  ],
-  statementOfInterest: {
+  contactNumber: {
     type: String,
   },
-  contactNumber: {
+  profileImg: {
     type: String,
   },
   workshop: {
     workshopName: { type: String },
+    workshopImage: { type: String },
     description: { type: String },
-    timeTo: { type: Date },
-    timeFrom: { type: Date },
+    timeTo: { type: String },
+    timeFrom: { type: String },
     date: { type: Date },
-    powerpointLink: { type: String },
+    fileLink: { type: String },
     submittedDate: { type: Date },
     approved: { type: Boolean },
   },
