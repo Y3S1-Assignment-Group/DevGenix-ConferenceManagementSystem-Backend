@@ -48,3 +48,4 @@ const UserSchema = new Schema({
 });
 
 module.exports = Researcher = mongoose.model("Researcher", UserSchema);
+
