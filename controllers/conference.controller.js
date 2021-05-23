@@ -1,13 +1,9 @@
-const bcrypt = require("bcryptjs");
-const Editor = require("../models/Editor.model");
-const jwt = require("jsonwebtoken");
-const config = require("config");
 const Conference = require("../models/Conference.model");
 
 //Add conference
 const addConference = async (req, res) => {
-  const { venue, confTitle, description, fomTime, toTime } = req.body;
-  const status = false;
+  const { venue, confTitle, description, fromTime, toTime } = req.body;
+  const approved = false;
 
   try {
     //create a conference instance
@@ -15,13 +11,14 @@ const addConference = async (req, res) => {
       venue,
       confTitle,
       description,
-      fomTime,
+      fromTime,
       toTime,
-      status,
+      approved,
     });
 
     //save conference to db
     await conference.save();
+    res.status(200).send("Conference Details added successfully");
   } catch (err) {
     //Something wrong with the server
     console.error(err.message);
@@ -39,7 +36,7 @@ const updateConference = async (req, res) => {
         conference.venue = req.body.venue;
         conference.confTitle = req.body.confTitle;
         conference.description = req.body.description;
-        conference.fomTime = req.body.fomTime;
+        conference.fromTime = req.body.fromTime;
         conference.toTime = req.body.toTime;
 
         conference
@@ -55,4 +52,66 @@ const updateConference = async (req, res) => {
   }
 };
 
-module.exports = { addConference, updateConference };
+const getConference = async (req, res) => {
+  try {
+    const conferences = await Conference.find();
+    res.json(conferences);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send("Server Error");
+  }
+};
+
+//Approved/Decline Conference Details
+const approveConferenceDetails = async (req, res) => {
+  try {
+    Conference.findByIdAndUpdate(req.params.id)
+      .then((existConference) => {
+        existConference.approved = req.body.approved;
+        existConference
+          .save()
+          .then(() =>
+            req.body.approved
+              ? res.json("Conference Details Approved!")
+              : res.json("Conference Details Unpproved!")
+          )
+          .catch((err) => res.status(400).json("Error: " + err));
+      })
+      .catch((err) => res.status(400).json("Error: " + err));
+  } catch (err) {
+    res.status(500).send("Server Error");
+  }
+};
+
+//get Approved Conference Details
+const getApprovedConferenceDetails = async (req, res) => {
+  try {
+    const conference = await Conference.find({
+      approved: true,
+    });
+    res.json(conference);
+  } catch (err) {
+    res.status(500).send("Server Error");
+  }
+};
+
+//get Unpproved Conference Details
+const getUnapprovedConferenceDetails = async (req, res) => {
+  try {
+    const conference = await Conference.find({
+      approved: false,
+    });
+    res.json(conference);
+  } catch (err) {
+    res.status(500).send("Server Error");
+  }
+};
+
+module.exports = {
+  addConference,
+  updateConference,
+  getConference,
+  approveConferenceDetails,
+  getApprovedConferenceDetails,
+  getUnapprovedConferenceDetails,
+};

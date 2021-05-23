@@ -11,14 +11,14 @@ const ConferenceSchema = new Schema({
   description: {
     type: String,
   },
-  fomTime: {
+  fromTime: {
     type: Date,
   },
   toTime: {
     type: Date,
   },
-  status: {
+  approved: {
     type: Boolean,
   },
 });
-module.exports = User = mongoose.model("Conference", ConferenceSchema);
+module.exports = Conference = mongoose.model("Conference", ConferenceSchema);
