@@ -45,6 +45,9 @@ const UserSchema = new Schema({
     submittedDate: { type: Date },
     approved: { type: Boolean },
   },
+  imgLink: {
+    type: String,
+  }
 });
 
 module.exports = Researcher = mongoose.model("Researcher", UserSchema);

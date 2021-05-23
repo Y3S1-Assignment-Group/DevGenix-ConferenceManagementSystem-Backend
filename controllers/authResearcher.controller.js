@@ -74,6 +74,8 @@ const registerResearcher = async (req, res) => {
     contactNumber,
     paid,
     researchPaper,
+    imgLink,
+  
   } = req.body;
 
   try {
@@ -102,6 +104,7 @@ const registerResearcher = async (req, res) => {
       contactNumber,
       paid,
       researchPaper,
+      imgLink,
     });
 
     //Encrypt Password
