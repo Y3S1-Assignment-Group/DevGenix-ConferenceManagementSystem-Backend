@@ -1,5 +1,5 @@
 const { response } = require("express");
-const stripe = require("stripe")("sk_test_51IrxfTFhAO44cnt8iog9PnuAf41drtgglHHG3k90NKWrqnlR7vcpC09tKSl0P9X40D3pHzDNT6sUhgVVYVLUVXdO00e3qeCKEo")
+const stripe = require("stripe")("sk_test_51IrxfTFhAO44cnt8UgckxiEBwEtAeKalt7hGSKSSUXB2cBkxGpg7kqjJjMIKUSMF7GL49lRDKjMeKQXhxbwftV4O0008PV7NRr")
 const uuid = require("uuid").v4
 
 //Add Latest news 

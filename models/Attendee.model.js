@@ -38,5 +38,8 @@ const UserSchema = new Schema({
   paid: {
     type: Boolean,
   },
+  imgLink: {
+    type: String,
+  }
 });
 module.exports = Attendee = mongoose.model("Attendee", UserSchema);

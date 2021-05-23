@@ -73,6 +73,7 @@ const registerAttendee = async (req, res) => {
     statementOfInterest,
     contactNumber,
     paid,
+    imgLink,
   } = req.body;
 
   try {
@@ -100,6 +101,7 @@ const registerAttendee = async (req, res) => {
       statementOfInterest,
       contactNumber,
       paid,
+      imgLink,
     });
 
     //Encrypt Password
