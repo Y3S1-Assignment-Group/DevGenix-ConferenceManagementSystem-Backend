@@ -3,17 +3,20 @@ const Templates = require("../models/Templates.model");
 //Add Latest news
 const addTemplate = async (req, res) => {
   const { templateName, fileLink } = req.body;
-
+  const approved = false;
   try {
     //create a Template
     const Temp = new Templates({
       templateName,
       fileLink,
+      approved,
     });
 
     //save user to the database
-    await Temp.save();
-    res.status(200).send("Template added successfully");
+
+    await Temp.save()
+      .then((template) => res.json(template))
+      .catch((err) => res.status(400).json("Error: " + err));
   } catch (err) {
     //Something wrong with the server
     console.log(err.message);
@@ -62,9 +65,31 @@ const deleteTemplate = async (req, res) => {
   }
 };
 
+//Approved/Decline Template
+const approveTemplate = async (req, res) => {
+  try {
+    Templates.findByIdAndUpdate(req.params.id)
+      .then((existTemplatep) => {
+        existTemplatep.approved = req.body.approved;
+        existTemplatep
+          .save()
+          .then(() =>
+            req.body.approved
+              ? res.json("Template Approved!")
+              : res.json("Template Unpproved!")
+          )
+          .catch((err) => res.status(400).json("Error: " + err));
+      })
+      .catch((err) => res.status(400).json("Error: " + err));
+  } catch (err) {
+    res.status(500).send("Server Error");
+  }
+};
+
 module.exports = {
   addTemplate,
   updateTemplate,
   getTemplate,
   deleteTemplate,
+  approveTemplate,
 };

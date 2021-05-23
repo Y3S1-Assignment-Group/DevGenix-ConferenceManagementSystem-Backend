@@ -17,8 +17,10 @@ const addConference = async (req, res) => {
     });
 
     //save conference to db
-    await conference.save();
-    res.status(200).send("Conference Details added successfully");
+    await conference
+      .save()
+      .then((conferenceObj) => res.json(conferenceObj))
+      .catch((err) => res.status(400).json("Error: " + err));
   } catch (err) {
     //Something wrong with the server
     console.error(err.message);

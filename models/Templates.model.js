@@ -8,6 +8,7 @@ const TemplateSchema = new Schema({
   fileLink: {
     type: String,
   },
+  approved: { type: Boolean },
 });
 
 module.exports = Presenter = mongoose.model("Templates", TemplateSchema);

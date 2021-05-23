@@ -6,6 +6,7 @@ const {
   updateTemplate,
   getTemplate,
   deleteTemplate,
+  approveTemplate,
 } = require("../controllers/temlate.controller");
 
 //@route  get api/Templates
@@ -24,5 +25,9 @@ router.put("/", auth, updateTemplate);
 //@desc   Update Templates
 //@access Public
 router.delete("/:id", auth, deleteTemplate);
+//@route  PUT api/Templates
+//@desc   approve Templates
+//@access Public
+router.put("/approve/:id", auth, approveTemplate);
 
 module.exports = router;
