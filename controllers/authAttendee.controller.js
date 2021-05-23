@@ -139,4 +139,22 @@ const registerAttendee = async (req, res) => {
   }
 };
 
-module.exports = { registerAttendee, getAttendeeDetails, loginAttendee };
+//get All Attendee details
+const getAllAttendees = async (req, res) => {
+  try {
+    //get all user details
+    //-password : dont return the pasword
+    const users = await Attendee.find().select("-password");
+    res.json(users);
+  } catch {
+    console.log(err.message);
+    res.status(500).send("Server Error");
+  }
+};
+
+module.exports = {
+  registerAttendee,
+  getAttendeeDetails,
+  loginAttendee,
+  getAllAttendees,
+};

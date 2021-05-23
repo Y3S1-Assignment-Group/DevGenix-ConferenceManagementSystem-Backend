@@ -72,11 +72,7 @@ const approveConferenceDetails = async (req, res) => {
         existConference.approved = req.body.approved;
         existConference
           .save()
-          .then(() =>
-            req.body.approved
-              ? res.json("Conference Details Approved!")
-              : res.json("Conference Details Unpproved!")
-          )
+          .then((response) => res.json(response))
           .catch((err) => res.status(400).json("Error: " + err));
       })
       .catch((err) => res.status(400).json("Error: " + err));
