@@ -5,6 +5,7 @@ const {
   registerAttendee,
   getAttendeeDetails,
   loginAttendee,
+  getAllAttendees,
 } = require("../controllers/authAttendee.controller");
 
 //@route  POST api/authattendee
@@ -22,5 +23,11 @@ router.post("/", loginAttendee);
 //@access Attendee
 //Route restricted with authetication (JWT Token)
 router.get("/", auth, getAttendeeDetails);
+
+//@route  GET api/authattendee
+//@desc   Get Attendee details using jwt
+//@access Attendee
+//Route restricted with authetication (JWT Token)
+router.get("/all", auth, getAllAttendees);
 
 module.exports = router;
