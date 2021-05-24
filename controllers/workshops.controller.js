@@ -5,7 +5,9 @@ const getApprovedWorkshops = async (req, res) => {
   try {
     const workshops = await Presenter.find({
       "workshop.approved": true,
-    }).select("firstName lastName jobStatus universityOrWorkPlace workshop");
+    }).select(
+      "firstName lastName profileImg jobStatus universityOrWorkPlace workshop"
+    );
     res.json(workshops);
   } catch (err) {
     res.status(500).send("Server Error");
