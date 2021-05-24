@@ -36,10 +36,9 @@ const approvalDecision = async (req, res) => {
         existResearchPaper.researchPaper.approved = req.body.approved;
         existResearchPaper
           .save()
-          .then(() =>
-            req.body.approved
-              ? res.json("ResearchPaper Approved!")
-              : res.json("ResearchPaper Unpproved!")
+          .then((response) =>
+            
+              res.json(response)
           )
           .catch((err) => res.status(400).json("Error: " + err));
       })

@@ -1,3 +1,4 @@
+const { response } = require("express");
 const Presenter = require("../models/Presenter.model");
 
 //get Approved ResearchPapers
@@ -32,11 +33,7 @@ const approveWorkshops = async (req, res) => {
         existWorkshop.workshop.approved = req.body.approved;
         existWorkshop
           .save()
-          .then(() =>
-            req.body.approved
-              ? res.json("Workshop Approved!")
-              : res.json("Workshop Unpproved!")
-          )
+          .then((response) => res.json(response))
           .catch((err) => res.status(400).json("Error: " + err));
       })
       .catch((err) => res.status(400).json("Error: " + err));
