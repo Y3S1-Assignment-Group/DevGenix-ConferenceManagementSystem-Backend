@@ -1,3 +1,4 @@
+const { response } = require("express");
 const Presenter = require("../models/Presenter.model");
 
 //get Approved ResearchPapers
@@ -5,7 +6,7 @@ const getApprovedWorkshops = async (req, res) => {
   try {
     const workshops = await Presenter.find({
       "workshop.approved": true,
-    }).select("firstName lastName jobStatus universityOrWorkPlace workshop");
+    }).select("firstName lastName profileImg jobStatus universityOrWorkPlace workshop ");
     res.json(workshops);
   } catch (err) {
     res.status(500).send("Server Error");
@@ -30,10 +31,8 @@ const approveWorkshops = async (req, res) => {
         existWorkshop.workshop.approved = req.body.approved;
         existWorkshop
           .save()
-          .then(() =>
-            req.body.approved
-              ? res.json("Workshop Approved!")
-              : res.json("Workshop Unpproved!")
+          .then((response) =>
+               res.json(response)
           )
           .catch((err) => res.status(400).json("Error: " + err));
       })
