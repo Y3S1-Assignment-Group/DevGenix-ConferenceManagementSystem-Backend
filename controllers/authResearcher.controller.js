@@ -75,7 +75,6 @@ const registerResearcher = async (req, res) => {
     paid,
     researchPaper,
     imgLink,
-  
   } = req.body;
 
   try {
@@ -142,4 +141,19 @@ const registerResearcher = async (req, res) => {
   }
 };
 
-module.exports = { getResearcherDetails, registerResearcher, loginResearcher };
+const getAllResearchers = async (req, res) => {
+  try {
+    const researchers = await Researcher.find();
+    res.json(researchers);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send("Server Error");
+  }
+};
+
+module.exports = {
+  getResearcherDetails,
+  registerResearcher,
+  loginResearcher,
+  getAllResearchers,
+};

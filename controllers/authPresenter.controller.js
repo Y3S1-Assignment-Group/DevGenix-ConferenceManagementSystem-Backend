@@ -135,4 +135,19 @@ const loginPresenter = async (req, res) => {
   }
 };
 
-module.exports = { registerPresenter, getPresenterDetails, loginPresenter };
+const getAllPresenters = async (req, res) => {
+  try {
+    const presenters = await Presenter.find();
+    res.json(presenters);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send("Server Error");
+  }
+};
+
+module.exports = {
+  registerPresenter,
+  getPresenterDetails,
+  loginPresenter,
+  getAllPresenters,
+};
