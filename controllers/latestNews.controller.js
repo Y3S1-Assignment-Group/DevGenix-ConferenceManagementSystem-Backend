@@ -46,13 +46,11 @@ const updateLatestNews = async (req, res) => {
 
 const deleteLatestNews = async (req, res) => {
   try {
-    LatestNews.findByIdAndDelete(req.body.id)
+    LatestNews.findByIdAndDelete(req.params.id)
       .then(() => {
-        res.status(200).json("Deleted");
+        res.json("News Deleted");
       })
-      .catch(() => {
-        res.status(200).json("Server error, news was not deleted");
-      });
+      .catch((err) => res.status(400).json("Error: " + err));
   } catch (err) {
     res.status(500).send("Server Error");
   }

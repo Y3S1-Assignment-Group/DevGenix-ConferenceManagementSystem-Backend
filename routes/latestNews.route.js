@@ -27,7 +27,7 @@ router.put("/", auth, updateLatestNews);
 //@route  DELETE api/LatestNews
 //@desc   delete Latest news
 //@access Public
-router.delete("/", auth, deleteLatestNews);
+router.delete("/:id", deleteLatestNews);
 //@route  GET api/LatestNews
 //@desc   Get Approved LatestNews
 //@access public

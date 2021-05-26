@@ -73,14 +73,22 @@ const approveTemplate = async (req, res) => {
         existTemplatep.approved = req.body.approved;
         existTemplatep
           .save()
-          .then(() =>
-            req.body.approved
-              ? res.json("Template Approved!")
-              : res.json("Template Unpproved!")
-          )
+          .then((response) => res.json(response))
           .catch((err) => res.status(400).json("Error: " + err));
       })
       .catch((err) => res.status(400).json("Error: " + err));
+  } catch (err) {
+    res.status(500).send("Server Error");
+  }
+};
+
+//Approved Template List
+const getApproveTemplatesList = async (req, res) => {
+  try {
+    const templates = await Templates.find({
+      approved: true,
+    });
+    res.json(templates);
   } catch (err) {
     res.status(500).send("Server Error");
   }
@@ -92,4 +100,5 @@ module.exports = {
   getTemplate,
   deleteTemplate,
   approveTemplate,
+  getApproveTemplatesList,
 };
