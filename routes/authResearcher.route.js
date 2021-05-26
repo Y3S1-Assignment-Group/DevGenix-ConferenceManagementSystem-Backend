@@ -6,6 +6,7 @@ const {
   registerResearcher,
   loginResearcher,
   getAllResearchers,
+  approveReasearcherPayment,
 } = require("../controllers/authResearcher.controller");
 
 //@route  POST api/authPresenter
@@ -15,5 +16,6 @@ router.get("/", auth, getResearcherDetails);
 router.post("/register", registerResearcher);
 router.post("/", loginResearcher);
 router.get("/all", auth, getAllResearchers);
+router.put("/approvePayment",auth, approveReasearcherPayment);
 
 module.exports = router;

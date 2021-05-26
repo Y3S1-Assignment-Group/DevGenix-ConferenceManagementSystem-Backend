@@ -74,7 +74,7 @@ const registerResearcher = async (req, res) => {
     contactNumber,
     paid,
     researchPaper,
-    imgLink,
+    profileImg,
   } = req.body;
 
   try {
@@ -103,7 +103,7 @@ const registerResearcher = async (req, res) => {
       contactNumber,
       paid,
       researchPaper,
-      imgLink,
+      profileImg,
     });
 
     //Encrypt Password
@@ -151,9 +151,28 @@ const getAllResearchers = async (req, res) => {
   }
 };
 
+const approveReasearcherPayment = async (req, res) => {
+  try {
+    Researcher.findByIdAndUpdate(req.body.id)
+      .then((existingResearcher) => {
+        existingResearcher.paid = req.body.paid;
+        existingResearcher
+          .save()
+          .then((response) =>
+              res.json(response)
+          )
+          .catch((err) => res.status(400).json("Error: " + err));
+      })
+      .catch((err) => res.status(400).json("Error: " + err));
+  } catch (err) {
+    res.status(500).send("Server Error");
+  }
+};
+
 module.exports = {
   getResearcherDetails,
   registerResearcher,
   loginResearcher,
   getAllResearchers,
+  approveReasearcherPayment,
 };
