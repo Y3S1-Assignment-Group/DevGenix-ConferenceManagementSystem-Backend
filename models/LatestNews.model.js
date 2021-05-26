@@ -12,6 +12,9 @@ const NewsSchema = new Schema({
     hyperlink: {
         type: String,
     },
+    approved:{
+        type:Boolean
+    }
 
 });
 

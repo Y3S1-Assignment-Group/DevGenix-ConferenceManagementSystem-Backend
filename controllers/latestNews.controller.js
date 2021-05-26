@@ -4,6 +4,7 @@ const LatestNews = require("../models/LatestNews.model");
 //Add Latest news
 const addLatestNews = async (req, res) => {
   const { newsDate, message, hyperlink } = req.body;
+  const approved = false;
 
   try {
     //create a user instance
@@ -11,6 +12,7 @@ const addLatestNews = async (req, res) => {
       newsDate,
       message,
       hyperlink,
+      approved,
     });
 
     //save user to the database
@@ -66,9 +68,51 @@ const getLatestNews = async (req, res) => {
   }
 };
 
+//get Approved LatestNews
+const getApprovedLatestNews = async (req, res) => {
+  try {
+    const news = await LatestNews.find({
+      approved: true,
+    });
+    res.json(news);
+  } catch (err) {
+    res.status(500).send("Server Error");
+  }
+};
+const getUnapprovedLatestNews = async (req, res) => {
+  try {
+    const news = await LatestNews.find({
+      approved: false,
+    });
+    res.json(news);
+  } catch (err) {
+    res.status(500).send("Server Error");
+  }
+};
+
+//Approved/Decline LastestNews
+const approveLastestNews = async (req, res) => {
+  try {
+    LatestNews.findByIdAndUpdate(req.params.id)
+      .then((existLastestNews) => {
+        existLastestNews.approved = req.body.approved;
+        existLastestNews
+          .save()
+          .then((response) => res.json(response))
+          .catch((err) => res.status(400).json("Error: " + err));
+      })
+      .catch((err) => res.status(400).json("Error: " + err));
+  } catch (err) {
+    res.status(500).send("Server Error");
+  }
+};
+
 module.exports = {
   addLatestNews,
   updateLatestNews,
   deleteLatestNews,
   getLatestNews,
+  getApprovedLatestNews,
+  getUnapprovedLatestNews,
+  approveLastestNews,
 };
