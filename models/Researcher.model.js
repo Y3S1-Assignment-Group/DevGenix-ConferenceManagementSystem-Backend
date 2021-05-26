@@ -45,7 +45,7 @@ const UserSchema = new Schema({
     submittedDate: { type: Date },
     approved: { type: Boolean },
   },
-  imgLink: {
+  profileImg: {
     type: String,
   }
 });
