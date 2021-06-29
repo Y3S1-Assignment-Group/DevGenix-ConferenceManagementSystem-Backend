@@ -1,7 +1,7 @@
 const { response } = require("express");
 const Presenter = require("../models/Presenter.model");
 
-//get Approved ResearchPapers
+//get Approved Workshops
 const getApprovedWorkshops = async (req, res) => {
   try {
     const workshops = await Presenter.find({
@@ -14,6 +14,8 @@ const getApprovedWorkshops = async (req, res) => {
     res.status(500).send("Server Error");
   }
 };
+
+//get Unpproved Workshops
 const getUnapprovedWorkshops = async (req, res) => {
   try {
     const workshops = await Presenter.find({
@@ -41,8 +43,20 @@ const approveWorkshops = async (req, res) => {
     res.status(500).send("Server Error");
   }
 };
+
+//get All Workshops By Presenter
+const getWorkshopsByPresenter = async (req, res) => {
+  try {
+    const workshops = await Presenter.findById(req.user.id).select("workshop");
+    res.json(workshops);
+  } catch (err) {
+    res.status(500).send("Server Error");
+  }
+};
+
 module.exports = {
   getApprovedWorkshops,
   getUnapprovedWorkshops,
   approveWorkshops,
+  getWorkshopsByPresenter,
 };
