@@ -6,7 +6,7 @@ const getApprovedResearchPapers = async (req, res) => {
     const researchPapers = await Researcher.find({
       "researchPaper.approved": true,
     }).select(
-      "firstName lastName profileImg jobStatus universityOrWorkPlace researchPaper "
+      "firstName lastName profileImg jobStatus universityOrWorkPlace researchPaper paid"
     );
     res.json(researchPapers);
   } catch (err) {
