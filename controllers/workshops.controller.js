@@ -33,15 +33,10 @@ const approveWorkshops = async (req, res) => {
     Presenter.findByIdAndUpdate(req.body.id)
       .then((existWorkshop) => {
         existWorkshop.workshop.approved = req.body.approved;
-        existWorkshop
-          .save()
-          .then((response) => res.json(response))
-          .catch((err) => res.status(400).json("Error: " + err));
+        existWorkshop.save().then((response) => res.json(response));
       })
       .catch((err) => res.status(400).json("Error: " + err));
-  } catch (err) {
-    res.status(500).send("Server Error");
-  }
+  } catch (err) {}
 };
 
 //get All Workshops By Presenter
