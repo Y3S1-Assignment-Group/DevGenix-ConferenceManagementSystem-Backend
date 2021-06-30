@@ -6,6 +6,8 @@ const {
   getApprovedResearchPapers,
   getUnapprovedResearchPapers,
   approvalDecision,
+  getResearchPapersByResearcher,
+  payResearchPaper,
 } = require("../controllers/researchpapers.controller");
 
 //@route  GET api/ResearchPapers/approved
@@ -22,5 +24,19 @@ router.get("/unapproved", auth, getUnapprovedResearchPapers);
 //@desc   Get Unapproved Research Papers
 //@access public
 router.put("/approvaldecision", auth, approvalDecision);
+
+//@route  POST api/ResearchPapers/pay
+//@desc   pay Research Paper
+//@access public
+router.put("/pay", auth, payResearchPaper);
+
+//@route  GET api/ResearchPapers/getResearchPapersByResearcher
+//@desc   Get Research Papers By Researcher
+//@access public
+router.get(
+  "/getResearchPapersByResearcher",
+  auth,
+  getResearchPapersByResearcher
+);
 
 module.exports = router;

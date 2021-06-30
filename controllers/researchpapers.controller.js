@@ -44,8 +44,40 @@ const approvalDecision = async (req, res) => {
     res.status(500).send("Server Error");
   }
 };
+
+//PayResearchPaper
+const payResearchPaper = async (req, res) => {
+  try {
+    Researcher.findByIdAndUpdate(req.user.id)
+      .then((existResearchPaper) => {
+        existResearchPaper.paid = true;
+        existResearchPaper
+          .save()
+          .then((response) => res.json(response))
+          .catch((err) => res.status(400).json("Error: " + err));
+      })
+      .catch((err) => res.status(400).json("Error: " + err));
+  } catch (err) {
+    res.status(500).send("Server Error");
+  }
+};
+
+//get Research Papers By Researcher
+const getResearchPapersByResearcher = async (req, res) => {
+  try {
+    const researchPapers = await Researcher.findById(req.user.id).select(
+      "firstName lastName profileImg jobStatus universityOrWorkPlace researchPaper paid"
+    );
+    res.json(researchPapers);
+  } catch (err) {
+    res.status(500).send("Server Error");
+  }
+};
+
 module.exports = {
   getApprovedResearchPapers,
   getUnapprovedResearchPapers,
   approvalDecision,
+  getResearchPapersByResearcher,
+  payResearchPaper,
 };
